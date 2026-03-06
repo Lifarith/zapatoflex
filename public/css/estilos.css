@@ -1,0 +1,267 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* HEADER */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #111;
+    padding: 15px 50px;
+}
+
+.logo {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    transition: 0.3s;
+}
+
+.nav a:hover {
+    color: #f39c12;
+}
+
+/* HERO */
+.hero {
+    height: 60vh;
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+    url('https://images.unsplash.com/photo-1542291026-7eec264c27ff');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+}
+
+.hero h1 {
+    font-size: 40px;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+.btn {
+    background: #f39c12;
+    padding: 10px 20px;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+/* PRODUCTOS */
+.productos {
+    padding: 50px;
+    text-align: center;
+}
+
+.productos h2 {
+    margin-bottom: 30px;
+}
+
+.grid-productos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background: #f4f4f4;
+    padding: 20px;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card img {
+    width: 100%;
+    border-radius: 5px;
+}
+
+.precio {
+    color: #e74c3c;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.card button {
+    background: #111;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.card button:hover {
+    background: #f39c12;
+}
+
+/* FOOTER */
+.footer {
+    background: #111;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    margin-top: 30px;
+}
+.btn-nav {
+    background: #f39c12;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-left: 10px;
+}
+
+.user-name {
+    color: #f39c12;
+    margin-left: 15px;
+    font-weight: bold;
+}
+/* HEADER */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #111;
+    padding: 15px 50px;
+}
+
+.logo {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* BOTONES LOGIN / REGISTER */
+.auth-buttons {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+/* BOTÓN INGRESAR */
+.btn-login {
+    background: transparent;
+    border: 2px solid #f39c12;
+    color: #f39c12;
+    padding: 8px 18px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+.btn-login:hover {
+    background: #f39c12;
+    color: white;
+}
+
+/* BOTÓN REGISTRAR */
+.btn-register {
+    background: #f39c12;
+    color: white;
+    padding: 8px 18px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+.btn-register:hover {
+    background: #e67e22;
+}
+
+/* USUARIO LOGUEADO */
+.user-name {
+    color: white;
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+/* BOTÓN LOGOUT */
+.btn-logout {
+    background: #e74c3c;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.btn-logout:hover {
+    background: #c0392b;
+}
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    background-color: #111;
+    color: white;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.auth-buttons {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Botones */
+.btn-login,
+.btn-register,
+.btn-logout {
+    padding: 8px 18px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+/* Ingresar */
+.btn-login {
+    background: transparent;
+    border: 2px solid white;
+    color: white;
+}
+
+.btn-login:hover {
+    background: white;
+    color: #111;
+}
+
+/* Registrar */
+.btn-register {
+    background: #ff6b00;
+    color: white;
+}
+
+.btn-register:hover {
+    background: #e55a00;
+}
+
+/* Logout */
+.btn-logout {
+    background: #dc3545;
+    color: white;
+}
