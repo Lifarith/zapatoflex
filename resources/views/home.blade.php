@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Zapatoflex | Comodidad y Estilo</title>
     <link rel="stylesheet" href="{{ asset('css/estilos.css') }}">
 </head>

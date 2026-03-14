@@ -1,10 +1,12 @@
 <?php
 
-
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\CompraRealizada;
 use Illuminate\Http\Request;
-    use App\Models\Producto;
+use App\Models\Producto;
 
 class CheckoutController extends Controller
 {
@@ -14,44 +16,64 @@ class CheckoutController extends Controller
 
         if (empty($carrito)) {
             return redirect()->route('carrito.index')
-                ->with('success', 'El carrito está vacío');
+                ->with('error', 'El carrito está vacío');
         }
 
         return view('checkout.index', compact('carrito'));
     }
 
+    public function pagar(Request $request)
+    {
+        $carrito = session()->get('carrito', []);
 
-public function pagar(Request $request)
-{
-    $carrito = session()->get('carrito', []);
-
-    if (empty($carrito)) {
-        return redirect()->route('carrito.index');
-    }
-
-    foreach ($carrito as $id => $item) {
-
-        $producto = Producto::find($id);
-
-        if (!$producto) {
-            continue;
+        // Verificar carrito
+        if (empty($carrito)) {
+            return redirect()->route('carrito.index')
+                ->with('error', 'El carrito está vacío');
         }
 
-        // ✅ Validar que haya stock suficiente
-        if ($producto->stock < $item['cantidad']) {
-            return redirect()->back()
-                ->with('error', 'No hay suficiente stock para ' . $producto->nombre);
+        $total = 0;
+
+        foreach ($carrito as $id => $item) {
+
+            $producto = Producto::find($id);
+
+            if (!$producto) {
+                continue;
+            }
+
+            // Validar stock
+            if ($producto->stock < $item['cantidad']) {
+                return redirect()->back()
+                    ->with('error', 'No hay suficiente stock para ' . $producto->nombre);
+            }
+
+            // Descontar inventario
+            $producto->stock -= $item['cantidad'];
+            $producto->save();
+
+            // Calcular total
+            $total += $producto->precio * $item['cantidad'];
         }
 
-        // ✅ Descontar inventario
-        $producto->stock -= $item['cantidad'];
-        $producto->save();
+        // Crear objeto simple de pedido
+        $pedido = (object)[
+            'id' => rand(1000,9999),
+            'total' => $total
+        ];
+
+        // Obtener usuario autenticado
+        $user = Auth::user();
+
+        // Enviar notificación
+        if ($user) {
+            Notification::send($user, new CompraRealizada($pedido));
+        }
+
+        // Vaciar carrito
+        session()->forget('carrito');
+
+        return redirect()->route('carrito.index')
+            ->with('success', 'Pago realizado correctamente');
     }
-
-    // ✅ Vaciar carrito
-    session()->forget('carrito');
-
-    return redirect()->route('carrito.index')
-        ->with('success', 'Pago realizado y stock actualizado correctamente');
-}
 }

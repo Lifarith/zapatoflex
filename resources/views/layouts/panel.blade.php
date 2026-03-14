@@ -22,13 +22,75 @@
 
     {{-- Navbar --}}
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
-            </li>
-        </ul>
-        <span class="navbar-brand ml-3"><b>Zapatoflex</b></span>
-    </nav>
+
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#">
+                <i class="fas fa-bars"></i>
+            </a>
+        </li>
+    </ul>
+
+    <span class="navbar-brand ml-3"><b>Zapatoflex</b></span>
+
+    <ul class="navbar-nav ml-auto">
+
+        @auth
+        <li class="nav-item dropdown">
+
+            <a class="nav-link" data-toggle="dropdown" href="#">
+                <i class="far fa-bell"></i>
+
+                @if(auth()->user()->unreadNotifications->count())
+                    <span class="badge badge-danger navbar-badge">
+                        {{ auth()->user()->unreadNotifications->count() }}
+                    </span>
+                @endif
+            </a>
+
+            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+
+                <span class="dropdown-header">
+                    {{ auth()->user()->notifications->count() }} Notificaciones
+                </span>
+
+                <div class="dropdown-divider"></div>
+
+                @forelse(auth()->user()->notifications as $notification)
+
+                    <a href="#" class="dropdown-item">
+
+                        <i class="fas fa-shopping-cart mr-2"></i>
+
+                        Compra realizada
+                        <br>
+
+                        Pedido #{{ $notification->data['pedido_id'] }}
+
+                        <span class="float-right text-muted text-sm">
+                            ${{ $notification->data['total'] }}
+                        </span>
+
+                    </a>
+
+                    <div class="dropdown-divider"></div>
+
+                @empty
+
+                    <span class="dropdown-item text-center">
+                        No hay notificaciones
+                    </span>
+
+                @endforelse
+
+            </div>
+
+        </li>
+        @endauth
+
+    </ul>
+
+</nav>
 
     {{-- Sidebar --}}
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
@@ -99,6 +161,12 @@
                             <p>Pedidos</p>
                         </a>
                     </li>
+                    <li class="nav-item">
+    <a href="{{ route('dashboard') }}" class="nav-link">
+        <i class="nav-icon fas fa-chart-line"></i>
+        <p>Dashboard</p>
+    </a>
+</li>
                 </ul>
             </nav>
         </div>

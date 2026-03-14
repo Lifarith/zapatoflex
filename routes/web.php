@@ -35,3 +35,9 @@ Route::resource('productos', ProductoController::class);
 
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
 Route::post('/checkout/pagar', [CheckoutController::class, 'pagar'])->name('checkout.pagar');
+
+
+/*Dashnoard*/
+use App\Http\Controllers\DashboardController;
+
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
